@@ -12,11 +12,13 @@ public class EnemyAI : MonoBehaviour
     NavMeshAgent navMeshAgent;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
+    EnemyHealth health;
 
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        health = GetComponent<EnemyHealth>();
     }
 
     // Update is called once per frame
@@ -27,7 +29,11 @@ public class EnemyAI : MonoBehaviour
             EngageTarget();
         else if (distanceToTarget <= ChaseRange)
             isProvoked = true;
-       
+        if (health.IsDead())
+        {
+            navMeshAgent.enabled = false;
+            enabled = false;
+        }
     }
 
     public void OnDamageTaken()
