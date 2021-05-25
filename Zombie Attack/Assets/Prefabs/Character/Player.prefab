@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 4628520683430550290}
   - component: {fileID: 558842404558573466}
   - component: {fileID: 7933158345195942204}
+  - component: {fileID: 5152326610522184220}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -342,7 +343,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20964ebcc713f8e45bf1d21dd8e609c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoAmount: 10
+  ammoSlots: []
+--- !u!114 &5152326610522184220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8663f970aea415b44a92aea6fa047114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 15
+  FPCamera: {fileID: 0}
+  granadePrefab: {fileID: 0}
 --- !u!1 &564550517588191492
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1889e968c51fff94eb3af9dc19f08a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWeapon: 0
 --- !u!1001 &749129631287179414
 PrefabInstance:
   m_ObjectHideFlags: 0

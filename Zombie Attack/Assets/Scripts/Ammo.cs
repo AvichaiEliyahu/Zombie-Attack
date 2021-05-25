@@ -10,7 +10,7 @@ public class Ammo : MonoBehaviour
     private class AmmoSlot
     {
         public AmmoType ammoType;
-        public int ammoAmount;
+        public int ammoAmount;  
     }
 
     public int GetCurrentAmmo(AmmoType ammoType)
