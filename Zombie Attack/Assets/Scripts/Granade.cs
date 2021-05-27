@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Granade : MonoBehaviour
@@ -12,28 +13,30 @@ public class Granade : MonoBehaviour
     [SerializeField] GameObject granadePrefab;
     [SerializeField] GameObject explosionEffect;
     [SerializeField] Ammo ammoSlot;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] TextMeshProUGUI granadesAmountText;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-            if(ammoSlot.GetCurrentAmmo(AmmoType.Granades) > 0)
-                ProccesGranade();
-        
+        ProccesGranade();
+        DisplayGranadesAmount();
     }
 
-    void ProccesGranade()
+    private void DisplayGranadesAmount()
     {
-        Debug.Log("pressed g");
-        StartCoroutine( ThrowGranade());
-        
+        granadesAmountText.SetText("Granades: " + ammoSlot.GetCurrentAmmo(AmmoType.Granades));
+    }
+
+    private void ProccesGranade()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+            if (ammoSlot.GetCurrentAmmo(AmmoType.Granades) > 0)
+                ProccesThrow();
+    }
+
+    void ProccesThrow()
+    {
+        StartCoroutine(ThrowGranade());
     }
 
     IEnumerator ThrowGranade()

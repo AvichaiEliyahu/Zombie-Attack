@@ -28,9 +28,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.81, z: -0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 5754216787080108329}
   - {fileID: 5145567334100045952}
   m_Father: {fileID: 400002}
   m_RootOrder: 0
@@ -184,9 +185,10 @@ GameObject:
   - component: {fileID: 558842404558573466}
   - component: {fileID: 7933158345195942204}
   - component: {fileID: 5152326610522184220}
+  - component: {fileID: 1083104265}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,9 +252,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2000000}
   movementSettings:
-    ForwardSpeed: 8
-    BackwardSpeed: 4
-    StrafeSpeed: 4
+    ForwardSpeed: 20
+    BackwardSpeed: 20
+    StrafeSpeed: 20
     RunMultiplier: 2
     RunKey: 304
     JumpForce: 50
@@ -318,6 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 100
+  healthText: {fileID: 0}
 --- !u!114 &558842404558573466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +346,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20964ebcc713f8e45bf1d21dd8e609c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoSlots: []
+  ammoSlots:
+  - ammoType: 0
+    ammoAmount: 10
+  - ammoType: 1
+    ammoAmount: 20
+  - ammoType: 2
+    ammoAmount: 6
+  - ammoType: 3
+    ammoAmount: 2
 --- !u!114 &5152326610522184220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,8 +368,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwForce: 15
-  FPCamera: {fileID: 0}
-  granadePrefab: {fileID: 0}
+  blastRadius: 5
+  damage: 80
+  explosionDelay: 3
+  FPCamera: {fileID: 2000000}
+  granadePrefab: {fileID: 4240267930505573885, guid: c2efcb1ec5a1d804187c9731e14a95be, type: 3}
+  explosionEffect: {fileID: 2179846544795918167, guid: 9a5a4a58885f2d84380c43fd1e4f02e3, type: 3}
+  ammoSlot: {fileID: 7933158345195942204}
+  granadesAmountText: {fileID: 0}
+--- !u!114 &1083104265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d900aeb6a40f046bd9b3a9c1bc678d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactCanvas: {fileID: 0}
+  timeToDisapear: 0.3
 --- !u!1 &564550517588191492
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +422,7 @@ Transform:
   - {fileID: 3029662502709706544}
   - {fileID: 2123008926655721114}
   m_Father: {fileID: 400000}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3268924786104782135
 MonoBehaviour:
@@ -405,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1889e968c51fff94eb3af9dc19f08a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: 0
+  currentWeapon: 2
 --- !u!1001 &749129631287179414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -471,7 +502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2337074158997199750, guid: 41e448ccd14388441927f6b48cc18859, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6698853810122544869, guid: 41e448ccd14388441927f6b48cc18859, type: 3}
       propertyPath: FPCamera
@@ -481,6 +512,10 @@ PrefabInstance:
       propertyPath: ammoSlot
       value: 
       objectReference: {fileID: 7933158345195942204}
+    - target: {fileID: 6698853810122544869, guid: 41e448ccd14388441927f6b48cc18859, type: 3}
+      propertyPath: ammoType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41e448ccd14388441927f6b48cc18859, type: 3}
 --- !u!4 &3029662502709706544 stripped
@@ -543,6 +578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 2337074158997199750, guid: a4ccc4b7fc8881544b995d46daa9e8a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6698853810122544869, guid: a4ccc4b7fc8881544b995d46daa9e8a8, type: 3}
       propertyPath: FPCamera
       value: 
@@ -557,6 +596,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2337074158996965286, guid: a4ccc4b7fc8881544b995d46daa9e8a8, type: 3}
   m_PrefabInstance: {fileID: 4402415756983036220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8203859745893065535
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 400000}
+    m_Modifications:
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.205
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.813
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483022791838231659, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+      propertyPath: m_Name
+      value: Flashlight
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+--- !u!4 &5754216787080108329 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4468383744573241878, guid: ad2303a9201eab74e8b13491109800fb, type: 3}
+  m_PrefabInstance: {fileID: 8203859745893065535}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8993681030758517773
 PrefabInstance:
@@ -637,6 +738,10 @@ PrefabInstance:
       propertyPath: ammoSlot
       value: 
       objectReference: {fileID: 7933158345195942204}
+    - target: {fileID: 6698853810122544869, guid: ada2587319194f542957a8c2ae277cb9, type: 3}
+      propertyPath: ammoType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7034463167645614966, guid: ada2587319194f542957a8c2ae277cb9, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
