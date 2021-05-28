@@ -6,13 +6,16 @@ using System;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] float hitPoints = 100f;
+
+    float currentHitPoints;
+    [SerializeField] float maxHitPoints = 100f;
     [SerializeField] TextMeshProUGUI healthText;
 
     DeathHandler deathHandler;
 
     private void Start()
     {
+        RestoreHealth();
         deathHandler = FindObjectOfType<DeathHandler>();
     }
 
@@ -23,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void DisplayHealth()
     {
-        healthText.SetText("Health: "+hitPoints);
+        healthText.SetText("Health: "+currentHitPoints);
     }
 
     public void TakeDamage(float damage)
@@ -32,14 +35,19 @@ public class PlayerHealth : MonoBehaviour
         ProcessDeath();
     }
 
+    public void RestoreHealth()
+    {
+        currentHitPoints = maxHitPoints;
+    }
+
     private void DecreaseHealth(float damage)
     {
-        hitPoints -= damage;
+        currentHitPoints -= damage;
     }
 
     private void ProcessDeath()
     {
-        if (hitPoints <= 0)
+        if (currentHitPoints <= 0)
             deathHandler.HandleDeath();
     }
 }

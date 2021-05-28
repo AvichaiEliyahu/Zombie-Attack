@@ -9,6 +9,7 @@ public class SceneLoader : MonoBehaviour
 
     private void Start()
     {
+
         startGameCanvas.enabled = true;
         Time.timeScale = 0;
         FindObjectOfType<WeaponSwitcher>().enabled = false;

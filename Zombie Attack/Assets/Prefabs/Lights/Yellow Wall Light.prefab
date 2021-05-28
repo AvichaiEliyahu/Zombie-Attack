@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8223482056495592507}
   m_Layer: 0
-  m_Name: Wall Light
+  m_Name: Yellow Wall Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,9 +74,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.5754717, g: 0.49000558, b: 0, a: 1}
-  m_Intensity: 3
-  m_Range: 10
+  m_Color: {r: 0.7735849, g: 0.49503198, b: 0, a: 1}
+  m_Intensity: 2
+  m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -109,7 +109,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -184,7 +184,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b05f9de1f0c80b49955aff192c6838b, type: 2}
+  - {fileID: 2100000, guid: e091f793d6f883c49bdabdc6103bce84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
