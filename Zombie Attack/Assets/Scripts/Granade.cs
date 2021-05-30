@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -46,30 +47,42 @@ public class Granade : MonoBehaviour
         granade.GetComponent<Rigidbody>().useGravity = true;
         ammoSlot.ReduceCurrentAmmo(AmmoType.Granades);
         yield return new WaitForSeconds(explosionDelay);
-        Explode(granade.transform);
-        Destroy(granade);
+        Explode(granade);
+        DestroyAfterSound(granade);
     }
 
-    void Explode(Transform granadeTransform)
+    void Explode(GameObject granade)
     {
-        PlayExplosionEffect(granadeTransform);
-        Collider[] enemiesHitByGranade = Physics.OverlapSphere(granadeTransform.position, blastRadius);
+        PlayExplosionEffect(granade.transform);
+        PlayExplosionSound(granade);
+        Collider[] enemiesHitByGranade = Physics.OverlapSphere(granade.transform.position, blastRadius);
         for (int i = 0; i < enemiesHitByGranade.Length; i++)
         {
             EnemyHealth enemy = enemiesHitByGranade[i].gameObject.GetComponent<EnemyHealth>();
             if (enemy)
             {
-                float damageTaken = (1-(Vector3.Distance(granadeTransform.position, enemy.transform.position)
+                float damageTaken = (1-(Vector3.Distance(granade.transform.position, enemy.transform.position)
                     / blastRadius))*damage;
-                Debug.Log("enemy at distance: " + Vector3.Distance(granadeTransform.position, enemy.transform.position) + "has taken: "+damageTaken +" damage");
                 enemy.TakeDamage(damageTaken);
             }
         }
+    }
+
+    private void PlayExplosionSound(GameObject granade)
+    {
+        granade.GetComponent<AudioSource>().Play();
     }
 
     void PlayExplosionEffect(Transform explosiontransform)
     {
         GameObject explosion = Instantiate(explosionEffect, explosiontransform.position, Quaternion.identity);
         Destroy(explosion, 2);
+    }
+
+    private void DestroyAfterSound(GameObject granade)
+    {
+        foreach (Transform child in granade.transform)
+            child.gameObject.SetActive(false);
+        Destroy(granade, granade.GetComponent<AudioSource>().clip.length);
     }
 }

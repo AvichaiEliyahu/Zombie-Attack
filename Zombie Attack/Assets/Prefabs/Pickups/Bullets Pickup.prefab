@@ -395,6 +395,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2599856930413270035, guid: 0a90bad008c812546939d182732074d2, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e7f633dda3117f4f90253f51ee065f0, type: 3}
+    - target: {fileID: 2599856930413270035, guid: 0a90bad008c812546939d182732074d2, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2621068076001585662, guid: 0a90bad008c812546939d182732074d2, type: 3}
       propertyPath: ammoType
       value: 0

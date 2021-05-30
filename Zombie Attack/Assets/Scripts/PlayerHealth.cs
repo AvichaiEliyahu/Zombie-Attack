@@ -35,6 +35,11 @@ public class PlayerHealth : MonoBehaviour
         ProcessDeath();
     }
 
+    public bool isHealthFull()
+    {
+        return maxHitPoints == currentHitPoints;
+    }
+
     public void RestoreHealth()
     {
         currentHitPoints = maxHitPoints;

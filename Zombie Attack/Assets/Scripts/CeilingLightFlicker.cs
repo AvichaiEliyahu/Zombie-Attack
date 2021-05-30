@@ -25,6 +25,7 @@ public class CeilingLightFlicker : MonoBehaviour
     {
         while (true)
         {
+            
             onTime = Random.Range(randomMinTime, randomMaxTime);
             yield return new WaitForSeconds(onTime);
             ceilingLight.enabled = !ceilingLight.enabled;

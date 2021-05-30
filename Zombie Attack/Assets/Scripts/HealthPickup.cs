@@ -6,19 +6,19 @@ using UnityEngine;
 public class HealthPickup : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 0.1f;
-        
+
+    AudioSource source;
     float currenOffset;
     PlayerHealth player;
 
     private void Start()
     {
         player = FindObjectOfType<PlayerHealth>();
-        currenOffset = 0;
+        source = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        //transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
         Rotate();
     }
 
@@ -29,13 +29,22 @@ public class HealthPickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !player.isHealthFull())
             Pickup();
     }
 
     private void Pickup()
     {
+        source.Play();
         player.RestoreHealth();
-        Destroy(gameObject);
+        //Destroy(gameObject, source.clip.length/4);
+        DestroyAfterSound();
+    }
+
+    private void DestroyAfterSound()
+    {
+        foreach (Transform child in gameObject.transform)
+            child.gameObject.SetActive(false);
+        Destroy(gameObject, source.clip.length);
     }
 }

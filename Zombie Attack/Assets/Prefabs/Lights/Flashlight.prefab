@@ -108,6 +108,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxIntensity: 2
   maxAngle: 70
-  lightDecay: 0.1
+  lightDecay: 0.05
   angleDecay: 1
   minimumAngle: 40
