@@ -7,6 +7,7 @@ public class WeaponZoom : MonoBehaviour
 {
     [SerializeField] Camera fpsCamera;
     [SerializeField] RigidbodyFirstPersonController firstPersonController;
+
     [SerializeField] float zoomedOutFOV = 60f;
     [SerializeField] float zoomedOutSensitivity = 4f;
 

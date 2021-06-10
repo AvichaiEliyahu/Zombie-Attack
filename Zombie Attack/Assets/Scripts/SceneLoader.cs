@@ -21,10 +21,11 @@ public class SceneLoader : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pauseGameCanvas.enabled = true;
-            FreezeGame();
-        }
+            if (startGameCanvas.enabled == false)
+            {
+                pauseGameCanvas.enabled = true;
+                FreezeGame();
+            }
     }
     public void StartGame()
     {

@@ -8,57 +8,56 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] float ChaseRange = 5f;
     [SerializeField] float turnSpeed = 5f;
-    [SerializeField] AudioClip[] zombieSounds;
-
-    AudioSource source;
+   
+    EnemySounds soundsPlayer;
     NavMeshAgent navMeshAgent;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
     EnemyHealth health;
     Transform target;
 
-    // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         health = GetComponent<EnemyHealth>();
-        source = GetComponent<AudioSource>();
         target = FindObjectOfType<PlayerHealth>().transform;
+        soundsPlayer = GetComponent<EnemySounds>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        distanceToTarget = Vector3.Distance(transform.position,target.position);
+        distanceToTarget = CalcDistance();
         if (isProvoked)
-        {
-            EngageTarget();
-            if(!source.isPlaying)
-                PlayRandomSound();
-        }
+            EngageSequence();
         else if (distanceToTarget <= ChaseRange)
             isProvoked = true;
+
         if (health.IsDead())
-        {
-            navMeshAgent.enabled = false;
-            enabled = false;
-        }
+            DeathSequence();
     }
 
-    private void PlayRandomSound()
+    public float CalcDistance()
     {
-        int chanceToPlay = UnityEngine.Random.Range(0, 200);
-        if (chanceToPlay == 1)
-        {
-            int randomSound = UnityEngine.Random.Range(0, zombieSounds.Length);
-            source.clip = zombieSounds[randomSound];
-            source.Play();
-        }
+        return Vector3.Distance(transform.position, target.position);
+    }
+
+    private void DeathSequence()
+    {
+        navMeshAgent.enabled = false;
+        enabled = false;
+        soundsPlayer.PlaySounds(SOUND_TYPE.DEATH);
+    }
+
+    private void EngageSequence()
+    {
+        EngageTarget();
+        soundsPlayer.PlaySounds(SOUND_TYPE.ENGAGE);
     }
 
     public void OnDamageTaken()
     {
         isProvoked = true;
+        soundsPlayer.PlaySounds(SOUND_TYPE.HIT);
     }
 
     void EngageTarget()
@@ -80,6 +79,7 @@ public class EnemyAI : MonoBehaviour
     void AttackTarget()
     {
         GetComponent<Animator>().SetBool("attack", true);
+        soundsPlayer.PlaySounds(SOUND_TYPE.ATTACK);
     }
 
     void FaceTarget()
